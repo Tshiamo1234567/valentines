@@ -1,0 +1,207 @@
+<html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Oratile 💖 Be My Valentine</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle at top, #ff9a9e, #fad0c4);
+}
+
+/* Floating hearts background */
+.heart {
+    position: absolute;
+    color: rgba(255, 0, 85, 0.6);
+    font-size: 20px;
+    animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+    from {
+        transform: translateY(100vh) scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 1;
+    }
+}
+
+/* Card */
+.card {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    width: 90%;
+    max-width: 520px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px);
+    border-radius: 30px;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 30px 80px rgba(255, 0, 85, 0.35);
+    animation: fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+h1 {
+    color: #ff0055;
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-weight: 400;
+    color: #e91e63;
+}
+
+#typewriter {
+    font-size: 18px;
+    color: #ad1457;
+    min-height: 60px;
+    margin: 20px 0;
+}
+
+/* Buttons */
+.buttons {
+    margin-top: 30px;
+    position: relative;
+}
+
+button {
+    border: none;
+    padding: 15px 35px;
+    font-size: 18px;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+#yesBtn {
+    background: linear-gradient(45deg, #ff4081, #ff0055);
+    color: white;
+    box-shadow: 0 10px 30px rgba(255, 0, 85, 0.5);
+}
+
+#yesBtn:hover {
+    transform: scale(1.1);
+}
+
+#noBtn {
+    position: absolute;
+    background: #ddd;
+    color: #555;
+}
+
+.footer {
+    margin-top: 30px;
+    font-size: 13px;
+    color: #880e4f;
+}
+
+/* Confetti hearts */
+.confetti {
+    position: fixed;
+    top: -10px;
+    font-size: 20px;
+    animation: fall 4s linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>Oratile 💖</h1>
+    <h2>Will You Be My Valentine?</h2>
+
+    <div id="typewriter"></div>
+
+    <div class="buttons">
+        <button id="yesBtn">YES 💘</button>
+        <button id="noBtn">NO 💔</button>
+    </div>
+
+    <div class="footer">
+        Made with courage, chaos & love 😌
+    </div>
+</div>
+
+<script>
+/* Floating hearts generator */
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 30 + 15 + "px";
+    heart.style.animationDuration = Math.random() * 5 + 5 + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 10000);
+}
+setInterval(createHeart, 300);
+
+/* Typewriter effect */
+const text = "From the moment you smile, my heart forgets how to behave 💕\nSo here I am, asking you in the bravest way I know 😌";
+let index = 0;
+const typeTarget = document.getElementById("typewriter");
+
+function typeText() {
+    if (index < text.length) {
+        typeTarget.innerHTML += text[index] === "\n" ? "<br>" : text[index];
+        index++;
+        setTimeout(typeText, 45);
+    }
+}
+typeText();
+
+/* NO button escape */
+const noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * 250;
+    const y = Math.random() * 150;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+});
+
+/* YES button magic */
+document.getElementById("yesBtn").addEventListener("click", () => {
+    alert("YAY!!! 💖💖💖\nYou just made my Valentine's Day perfect, Oratile 😍");
+
+    for (let i = 0; i < 40; i++) {
+        const conf = document.createElement("div");
+        conf.className = "confetti";
+        conf.innerText = "💖";
+        conf.style.left = Math.random() * 100 + "vw";
+        conf.style.fontSize = Math.random() * 25 + 15 + "px";
+        document.body.appendChild(conf);
+        setTimeout(() => conf.remove(), 4000);
+    }
+});
+</script>
+
+</body>
+</html>
